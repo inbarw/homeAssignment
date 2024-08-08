@@ -28,7 +28,8 @@ class Base():
 
     def wait_for_element_to_be_clickable_and_click(self, locator, timeout=15):
         wait = WebDriverWait(self.driver, timeout)
-        wait.until(EC.element_to_be_clickable(locator)).click()
+        wait.until(EC.element_to_be_clickable(locator))
+        self.driver.execute_script("arguments[0].click();", self.find_element(*locator))
 
     def find_elements(self, by: By, value: str):
         return self.driver.find_elements(by, value)

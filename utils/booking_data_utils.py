@@ -1,7 +1,7 @@
 from utils.date_utils import get_future_date
 
 
-def set_booking_data(first_name="Test", last_name="User", total_price=140, deposit_paid=True,
+def set_booking_data(first_name, last_name, total_price, deposit_paid,
                           checkin_offset_weeks=0, checkin_offset_days=0,checkout_offset_weeks=0, checkout_offset_days=0,
                           additional_needs="Breakfast"):
     check_in_date = get_future_date(weeks=checkin_offset_weeks, days=checkin_offset_days)

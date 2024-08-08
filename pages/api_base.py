@@ -8,21 +8,11 @@ class APIBase():
 
     def request_api(self, method, endpoint='', data=None, params=None, headers=None):
         url = f"{self.base_url}/{endpoint}"
-        response = requests.request(method, url, json=data, headers=headers, params=params)
-        return response
+        try:
+            response = requests.request(method, url, json=data, headers=headers, params=params)
+            response.raise_for_status()
+        except requests.exceptions.HTTPError as e:
+            return "Error: " + str(e)
+        return response.json()
 
-    # def _post(self, endpoint, data=None):
-    #     url = f"{self.base_url}/{endpoint}"
-    #     response = requests.post(url, json=data, headers=headers or self.headers)
-    #     return response
-    #
-    # def _get(self, endpoint, params=None):
-    #     url = f"{self.base_url}/{endpoint}"
-    #     response = requests.get(url, params=params)
-    #     return response
-    #
-    # def _put(self, endpoint, data=None):
-    #     url = f"{self.base_url}/{endpoint}"
-    #     response = requests.put(url, json=data, headers=self.headers)
-    #     return response
 
